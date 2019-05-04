@@ -17,15 +17,16 @@ public class RawData_Adapter extends RecyclerView.Adapter<RawData_Adapter.viewHo
 
 
 
-    private List<MyJsonResponse> dataList;
+    private List<AccountData>  dataList;
 
-    public RawData_Adapter(List<MyJsonResponse> drawerBeanList) {
+    public RawData_Adapter(List<AccountData> drawerBeanList) {
         this.dataList = drawerBeanList;
 
     }
 
+    @NonNull
     @Override
-    public viewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.raw_data, parent, false);
 
@@ -34,7 +35,12 @@ public class RawData_Adapter extends RecyclerView.Adapter<RawData_Adapter.viewHo
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        holder.tv_data.setText(dataList.get(holder.getAdapterPosition()).getAccount().getType().getName());
+        AccountData accountData = dataList.get(holder.getAdapterPosition());
+        holder.tv_data.setText("Account Name : "+accountData.getAccountName()
+        +"\n"+"AccountBalance "+accountData.getFormattedAccountBalance()
+        +"\n"+"AvailableBalance "+accountData.getFormattedAvailableBalance()
+        +"\n"+"ReservedAmount "+accountData.getFormattedReservedAmount()
+        +"\n"+"CreditLimit "+accountData.getFormattedCreditLimit());
 
     }
 
